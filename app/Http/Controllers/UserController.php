@@ -81,9 +81,10 @@ class UserController extends Controller
     public function store(UserStoreRequest $request): JsonResponse
     {
         $user = $this->userRepository->create([
-            'name'     => $request->input('name'),
-            'email'    => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+            'name'     => trim($request->input('name')),
+            'nickname' => trim($request->input('nickname')),
+            'email'    => trim($request->input('email')),
+            'password' => Hash::make(trim($request->input('password'))),
         ]);
 
         return \Response::json($this->userMapper->single($user));
@@ -127,6 +128,7 @@ class UserController extends Controller
     {
         $data = [
             'name'     => trim($request->input('name')),
+            'nickname' => trim($request->input('nickname')),
             'email'    => trim($request->input('email')),
             'password' => Hash::make(trim($request->input('password')) ?: null),
         ];

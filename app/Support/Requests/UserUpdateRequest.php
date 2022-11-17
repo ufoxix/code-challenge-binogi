@@ -18,6 +18,14 @@ use Illuminate\Validation\Rule;
  *      maxLength=191,
  *   ),
  *   @OA\Property(
+ *      property="nickname",
+ *      type="string",
+ *      example="marisol61",
+ *      description="User nickname",
+ *      minLength=1,
+ *      maxLength=29,
+ *   ),
+ *   @OA\Property(
  *      property="email",
  *      type="string",
  *      minLength=1,
@@ -51,10 +59,16 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name'     => 'string|max:191|min:1',
+            'nickname' => [
+                'string',
+                'max:29',
+                'min:1',
+                Rule::unique('users')->ignore(request()?->route('user')->id),
+            ],
             'password' => 'string|min:8|max:191',
             'email'    => [
                 'email',
-                Rule::unique('users')->ignore(request()->route('user')->id),
+                Rule::unique('users')->ignore(request()?->route('user')->id),
             ],
         ];
     }

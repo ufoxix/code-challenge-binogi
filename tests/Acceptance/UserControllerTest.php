@@ -27,6 +27,7 @@ class UserControllerTest extends FrameworkTest
             [
                 'id'    => $user->id,
                 'name'  => $user->name,
+                'nickname'  => $user->nickname,
                 'email' => $user->email,
             ],
             json_decode($result->getContent(), true)
@@ -40,6 +41,7 @@ class UserControllerTest extends FrameworkTest
         $data = [
             'id'    => $user->id,
             'name'  => $this->faker->name,
+            'nickname'  => $this->faker->userName,
             'email' => $user->email,
         ];
         $result = $this->put("/api/users/$user->id", $data);
@@ -51,6 +53,7 @@ class UserControllerTest extends FrameworkTest
     {
         $data = [
             'name'     => $this->faker->name,
+            'nickname'     => $this->faker->userName,
             'email'    => $email = $this->faker->unique()->email,
             'password' => 'hen rooster chicken duck',
         ];

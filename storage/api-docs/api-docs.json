@@ -210,6 +210,13 @@
                         "minLength": 1,
                         "example": "Jane Doe"
                     },
+                    "nickname": {
+                        "description": "User nickname",
+                        "type": "string",
+                        "maxLength": 29,
+                        "minLength": 1,
+                        "example": "marisol61"
+                    },
                     "email": {
                         "description": "User email",
                         "type": "string",
